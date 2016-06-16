@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type"
+          content="application/json; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>JIRA 이슈 추이 그래프 관리자 페이지</title>
+    <!-- 부트스트랩외 추가작성 css -->
+    <link rel="stylesheet" type="text/css"
+          href="../common/css/additional-design.css"/>
+    <!-- 부트스트랩 css-->
+    <link href="../common/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 부트스트랩 datetimepicker css -->
+    <link href="../common/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <!-- 부트스트랩 leftmenu css -->
+    <link href="../common/css/simple-sidebar.css" rel="stylesheet">
+    <!-- 부트스트랩 script-->
+    <script src="../common/js/jquery-1.12.2.min.js"></script>
+    <script src="../common/js/bootstrap/bootstrap.min.js"></script>
+    <!--[if lt IE 9]>
+    <script src="../common/js/bootstrap/html5shiv.js"></script>
+    <script src="../common/js/bootstrap/respond.js"></script>
+    <![endif]-->
+    <!-- script -->
+    <script type="text/javascript" src="./js/projectList.js"></script>
+    <script type="text/javascript" src="./js/pageMovement.js"></script>
+	<!-- 경고창 자바스크립트 -->
+	<script type="text/javascript" src="../common/js/showAlert.js"></script>
+    <!-- 로딩 script -->
+    <script>
+        $(document).ready(function ($) {
+
+            // 페이지가 로딩될 때 'Loading 이미지'를 숨김
+            $('#viewLoading').hide();
+
+            // ajax 실행 및 완료시 'Loading 이미지'작동
+            $('#viewLoading').ajaxStart(function () {
+
+                $(this).fadeIn(500);
+
+            }).ajaxStop(function () {
+
+                $(this).hide();
+
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+<div class="collector_wrap">
+    <header class="collector_header">
+        <nav class="topMenuNavbar navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="topMenuHeader navbar-header">
+                    <button type="button" class="navbar-toggle collapsed"
+                            data-toggle="collapse" data-target="#topMenuContainer">
+                        <span class="sr-only">Toggle navigation</span> <span
+                            class="icon-bar"></span> <span class="icon-bar"></span> <span
+                            class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="dashboard" style="padding-top: 5px;">JIRA
+                        COLLECTOR<br/>ADMINISTRATOR
+                    </a>
+                </div>
+                <!-- /.topMenuHeader -->
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="topMenuContainer">
+                    <ul id="topMenuList" class="nav navbar-nav">
+                        <li><a href="../admin/dashboard">대시보드 <span
+                                class="sr-only">(current)</span></a></li>
+                        <li class="dropdown active"><a href="#"
+                                                       class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                                       aria-expanded="false">프로젝트 관리 <span class="caret"></span>
+                        </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="projectlist">프로젝트</a></li>
+                                <li><a href="projectdate">날짜 설정(임의 메뉴)</a></li>
+                                <li><a href="releaseVersionList">릴리즈</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a href="#" class="dropdown-toggle"
+                                                data-toggle="dropdown" role="button" aria-expanded="false">품질관리
+                            <span class="caret"></span>
+                        </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">품질점검</a></li>
+                                <li><a href="#">품질보고서</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a href="#" class="dropdown-toggle"
+                                                data-toggle="dropdown" role="button" aria-expanded="false">측정
+                            및 분석 <span class="caret"></span>
+                        </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">고객사 결함현황</a></li>
+                                <li><a href="#">전체분석결과</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">시스템 관리</a></li>
+
+                    </ul>
+                    <!-- /.topMenuList -->
+                    <ul id="rightTopMenuList" class="nav navbar-nav navbar-right">
+                        <li><input type="button" id="btnGoMainpage"
+                                   class="btn btn-default" value="메인 페이지 바로가기"/></li>
+                        <li><span class="glyphicon glyphicon-user login"></span></li>
+                    </ul>
+                    <!-- /.rightTopMenuList -->
+                </div>
+                <!-- /.topMenuContainer -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+        <!-- /.topMenuNavbar -->
+    </header>
+    <!-- /.collector_header -->
+
+    <div class="collector_body" id="collectorBodyWrapper">
+        <div class="adminLeftMenuWrap side-menu">
+            <div class="adminLeftMenuNav navbar navbar-default"
+                 role="navigation">
+                <div class="side-menu-header">
+                    <div class="menu-name-wrapper">
+                        <h1 class="side-menu-header-name">
+                            <span class="sidebarTitle">프로젝트 관리</span>
+                        </h1>
+                    </div>
+                </div>
+                <!-- 본격 메뉴 -->
+                <div class="side-menu-container">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="projectlist"><span
+                                class="glyphicon glyphicon-cog"></span> 프로젝트</a></li>
+                        <li><a href="projectdate"><span
+                                class="glyphicon glyphicon-cog"></span> 날짜 설정(임의 메뉴)</a></li>
+                        <li><a href="releaseVersionList"><span
+                                class="glyphicon glyphicon-cog"></span> 릴리즈</a></li>
+                    </ul>
+                </div>
+                <!-- /.side-menu-container -->
+            </div>
+            <!-- /.adminLeftMenuNav -->
+        </div>
+        <!-- /.adminLeftMenuWrap -->
+        <div class="adminWrap container-fluid side-body">
+            <header id="admin-header-wrap" class="row">
+                <div class="col-xs-12">
+                    <h2 class="adminContent-title">
+                        <span class="mainTitle">프로젝트 목록</span>
+                    </h2>
+                    <hr/>
+                </div>
+            </header>
+            <div id="adminContentWrap" class="row">
+                <div id="jiraNameConfigButtonArea" class="col-xs-12">
+                    <table class="JiraNameAlternationButton_content">
+                        <tbody>
+                        <tr>
+                            <td class="tdContentButtonHeader" colspan="6">
+                                <button class="btn btn-default" id="btnProjectAddition"
+                                        type="button">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                    프로젝트 추가
+                                </button>
+                                &nbsp;
+                                <button class="btn btn-default" id="btnDelete" type="button"
+                                        style="color: red;">
+                                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                    삭제
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="jiraNameConfigContentArea" class="col-xs-12">
+                    <table class="JiraNameAlternationTable_content">
+                        <thead>
+                        <tr>
+                            <td class="tdcheck"><input type="checkbox"
+                                                       id="allCheckbox"/></td>
+                            <td class="tdMenu"><label id="projectSort">프로젝트
+                                명<!--<span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>-->
+                            </label></td>
+                            <td class="tdMenu">키<!--<span
+                                    class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>--></td>
+                            <td class="tdMenu">릴리즈 수<!--<span
+                                    class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>--></td>
+                            <td class="tdMenu">담당자<!--<span
+                                    class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>--></td>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <!-- /.jiraNameConfigContentArea -->
+            </div>
+            <!-- /.adminContentWrap -->
+        </div>
+        <!-- /.adminWrap -->
+        <div id="viewLoading">
+            <img src="../common/images/viewLoading.gif"/>
+        </div>
+        <!-- ./viewLoading -->
+    </div>
+    <!-- /.collector_body, /#collectorBodyWrapper -->
+</div>
+<!-- /.collector_wrap -->
+</body>
+</html>

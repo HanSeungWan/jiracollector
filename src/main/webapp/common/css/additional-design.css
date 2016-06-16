@@ -1,0 +1,487 @@
+.adminLeftMenuWrap, .graphLeftMenuWrap {
+	z-index: 200;
+}
+
+.side-body {
+	z-index: 100;
+}
+
+/* 상단 네비게이션 영역 */
+#btnGoMainpage, #btnGoAdmin, .login {
+	margin-top: 7px;
+	margin-right: 7px;
+}
+
+#topMenuList {
+	font-size: 14px;
+}
+
+.login {
+	width: 32px;
+	height: 32px;
+	color: white;
+	font-size: 27px;
+	padding-left: 2px;
+	padding-right: 2px;
+	padding-top: 5px;
+	background-color: #cec6b0;
+	border-radius: 3px 3px 3px 3px;
+}
+
+/* 상단 네비게이션 영역 반응형*/
+@media screen and (max-width: 768px) {
+	.side-collapse-container {
+		width: 100%;
+		position: relative;
+		left: 0;
+		transition: left .4s;
+	}
+	.side-collapse-container.out {
+		left: 200px;
+	}
+	.side-collapse {
+		top: 50px;
+		bottom: 0;
+		left: 0;
+		width: 200px;
+		position: fixed;
+		overflow: hidden;
+		transition: width .4s;
+	}
+	.side-collapse.in {
+		width: 0;
+	}
+}
+
+/* 좌측 side-bar영역 */
+.side-menu-name-wrapper {
+	height: 50px;
+	border: solid 1px #e7e7e7;
+}
+
+.side-menu-header-name {
+	text-align: center;
+	vertical-align: middle;
+}
+
+/**** 공통요소 ****/
+/* select box */
+.select-label {
+	position: relative
+}
+
+.select-label .selectbox {
+	padding: 5px;
+	height: 34px;
+	width: 150px;
+	margin-top: 5px;
+}
+
+/* 관리자페이지 날짜선택박스 */
+.date-select-form {
+	position: relative;
+	vertical-align: middle;
+}
+
+.dateSelectBox {
+	height: 30px;
+	width: 150px;
+}
+
+/* 제품버전 및 날짜선택 테이블 */
+.normalTableForSelection_header, .normalTableForSelection_content {
+	border: 1px solid #bcbcbc;
+	width: 95%;
+}
+
+.normalTableForSelection_header thead tr th {
+	padding-left: 40px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: left;
+	border: 1px solid #bcbcbc;
+	height: 45px;
+	background: #EAEAEA;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.normalTableForSelection_content .tdMenu {
+	padding: 5px;
+	text-align: center;
+	border: 1px solid #bcbcbc;
+	height: 55px;
+	background: #FCFCFC;
+	width: 170px;
+	font-weight: bold;
+}
+
+.normalTableForSelection_content .tdContent {
+	padding: 5px;
+	border: 1px solid #bcbcbc;
+	height: 45px;
+	padding-left: 10px;
+}
+
+.normalTableForSelection_content .tdContent-selectionDate,
+	.tdContent_selectionData {
+	padding: 5px;
+	border: none;
+	height: 45px;
+	width: 162px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.normalTableForSelection_content .tdContent_button {
+	padding-left: 10px;
+}
+
+.normalTableForSelection_content .tdContent-wave {
+	text-align: center;
+	width: 20px;
+}
+
+.TableForSelection_content .tdMenu {
+	padding: 5px;
+	text-align: center;
+	height: 55px;
+	background: #FCFCFC;
+	width: 100px;
+	font-weight: bold;
+}
+
+/* 지라명 변경 테이블*/
+.versionAlternationTable_content {
+	border: 1px solid #bcbcbc;
+	width: 100%;
+}
+
+.versionAlternationTable_content {
+	padding: 5px;
+	height: 45px;
+}
+
+.versionAlternationTable_content thead {
+	font-weight: bold;
+	text-align: center;
+	background: #EAEAEA;
+}
+
+.versionAlternationTable_content .tdMenu {
+	width: 10%;
+	text-align: center;
+	height: 45px;
+	border-bottom: 1px solid #bcbcbc;
+}
+
+.versionAlternationTable_content .tdContent {
+	width: 10%;
+	text-align: center;
+	height: 45px;
+	border-bottom: 1px solid #bcbcbc;
+}
+
+/* 지라명 변경 테이블*/
+.JiraNameAlternationTable_content {
+	border: 1px solid #bcbcbc;
+	width: 100%;
+}
+
+.JiraNameAlternationButton_content .tdContentButtonHeader {
+	padding: 5px;
+	height: 45px;
+}
+
+.JiraNameAlternationTable_content thead {
+	font-weight: bold;
+	text-align: center;
+	background: #EAEAEA;
+}
+
+.JiraNameAlternationTable_content .tdMenu {
+	width: 10%;
+	text-align: center;
+	height: 45px;
+	border-bottom: 1px solid #bcbcbc;
+}
+
+.JiraNameAlternationTable_content .tdcheck {
+	text-align: left !important;
+	padding-left: 12px !important;
+	padding-right: 0 !important;
+	width: 1%;
+	height: 45px;
+	border-bottom: 1px solid #bcbcbc;
+}
+
+.JiraNameAlternationTable_content .tdContent {
+	width: 10%;
+	text-align: center;
+	height: 45px;
+	border-bottom: 1px solid #bcbcbc;
+}
+
+.JiraNameAlternationTable_content .savebutton {
+	width: 10%;
+	text-align: center;
+	height: 45px;
+	border-bottom: 1px solid #bcbcbc;
+	border-right: 1px solid #bcbcbc;
+	padding-right: 15px;
+}
+
+/**** 사용자페이지 collector_body영역 ****/
+#drawedGraph, #dataTable {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#drawedGraph {
+	width: 93%;
+}
+
+.adminContent-title, .graph-title {
+	margin-left: 20px;
+}
+
+/* 전체데이터 보기, 최신데이터 보기 */
+#chartContainer, #dvOutput {
+	width: 100%;
+}
+
+.dataTableContentArea #tbContents {
+	width: 95%;
+	border-bottom-width: medium;
+	border-collapse: collapse;
+}
+
+#tdContents {
+	text-align: center;
+	border: 1px solid #bcbcbc;
+	padding: 5px 10px;
+}
+
+#tbContents th {
+	border: 1px solid #bcbcbc;
+	padding: 5px 10px;
+}
+
+.alldata-recentdata-selectbox-table {
+	border: 1px solid #bcbcbc;
+	background: #EAEAEA;
+	width: 100%;
+}
+
+.selectbox-mainpage-data {
+	padding-left: 15px;
+	padding-top: 6px;
+	padding-bottom: 4px;
+}
+
+#tbContents {
+	width: 100%;
+	border-bottom-width: medium;
+	border-collapse: collapse;
+	margin-top: -2px;
+}
+
+#tbContents td {
+	text-align: center;
+	border: 1px solid #bcbcbc;
+	padding: 5px 10px;
+}
+
+#tbContents th {
+	border: 1px solid #bcbcbc;
+	padding: 5px 10px;
+	text-align: center;
+	background: white;
+	color: black;
+	font-weight: bold;
+}
+
+/**** 로딩아이콘 ****/
+#viewLoading {
+	width: 310px;
+	height: 400px;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+}
+
+/**** 글꼴 ****/
+h2 .mainTitle {
+	font-weight: bold;
+}
+
+h1 .sidebarTitle {
+	font-weight: bold;
+}
+
+/****프로젝트 추가***/
+#projectAdditionContentArea {
+	border: 1px solid #ddd;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin-bottom: 10px;
+	margin-left: 30px;
+	border-radius: 3px 3px 3px 3px;
+}
+
+.validationAlert, .validationAlert label {
+	color: red;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+/**** 프로젝트 상세****/
+.tab-content {
+	border: 1px solid #ddd;
+	border-top: transparent;
+	padding-top: 30px;
+	padding-right: 20px;
+	padding-bottom: 30px;
+	margin-bottom: 20px;
+	border-top-left-radius: 0px 0px;
+	border-top-right-radius: 1px 3px;
+	border-bottom-right-radius: 3px 3px;
+	border-bottom-left-radius: 3px 3px;
+}
+
+#personInChargeOfDetail {
+	width: 95%;
+}
+
+#buttonArea {
+	padding-right: 35px;
+	margin-bottom: -20px;
+}
+
+/**** 프로젝트 리스트 ****/
+#adminContentWrap {
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+#graphContent {
+	margin-left: 20px;
+	width: 100%;
+}
+
+#btnsaveReleaseStatus {
+	text-align: center;
+	vertical-align: middle;
+	margin: 30px;
+}
+
+#saveButtonArea {
+	text-align: center;
+}
+/* 품질지표 */
+#qualityIndicatorButtonArea, #qualityIndicatorContentArea {
+	padding-left: 10px;
+}
+
+.qualityIndicatorButton_content {
+	width: 100%;
+	margin-left: 10px;
+}
+
+.qualityIndicatorTable_content {
+	border: 1px solid #bcbcbc;
+}
+
+.qualityIndicatorButton_content .tdContentButtonHeader {
+	padding: 5px;
+	height: 45px;
+}
+
+.qualityIndicatorTable_content thead {
+	font-weight: bold;
+	text-align: center;
+	background: #EAEAEA;
+}
+
+.qualityIndicatorTable_content .tdMenu {
+	width: 10%;
+	text-align: center;
+	height: 45px;
+	border-bottom: 1px solid #bcbcbc;
+}
+
+.qualityIndicatorTable_content .tdExplanation {
+	width: 20%;
+	text-align: center;
+	height: 45px;
+	border-bottom: 1px solid #bcbcbc;
+}
+
+.qualityIndicatorTable_content .tdcheck {
+	text-align: left !important;
+	padding-left: 12px !important;
+	padding-right: 0 !important;
+	width: 1%;
+	height: 45px;
+	border-bottom: 1px solid #bcbcbc;
+}
+
+.qualityIndicatorTable_content .tdContent {
+	width: 10%;
+	text-align: center;
+	height: 45px;
+	border-bottom: 1px solid #bcbcbc;
+}
+
+#btnGoList {
+	float: right;
+	padding-right: 40px;
+}
+
+/**alert**/
+#allScreen {
+	position: fixed;
+	top: 0px;
+	z-index: 5000;
+	background-color: #000;
+	opacity: 0.3;
+}
+
+.alertpositionTop {
+	position: fixed;
+	top: 0px;
+	width: 100%;
+	z-index: 5001;
+	text-align: center;
+}
+
+.alertpositionMid {
+	z-index: 5001;
+	text-align: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 300px;
+	height: 150px;
+	margin-left: -150px;
+	martin-top: -75px;
+	overflow: hidden;
+}
+/*얍*/
+/* 편집가능한 이미지 보이기*/
+.textEditorIcon {
+	margin-left: 15px;
+	padding-right: 4px;
+	color: black;
+}
+
+/*프로젝트 상세 프로젝트 명 열 맞추기*/
+#projectNameOfDetailPage {
+	padding-top: 7px;
+}
+
+.projectKey {
+	font-size: 14px;
+	margin-left: 10px;
+	font-weight: bold;
+}

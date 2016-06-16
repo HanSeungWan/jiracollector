@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type"
+	content="application/json; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>JIRA 이슈 추이 그래프 관리자 페이지</title>
+<!-- 부트스트랩외 추가작성 css -->
+<link rel="stylesheet" type="text/css"
+	href="../common/css/additional-design.css" />
+<!-- 부트스트랩 css-->
+<link href="../common/css/bootstrap.min.css" rel="stylesheet">
+<!-- 부트스트랩 datetimepicker css -->
+<link href="../common/css/bootstrap-datetimepicker.min.css"
+	rel="stylesheet">
+<!-- 부트스트랩 leftmenu css -->
+<link href="../common/css/simple-sidebar.css" rel="stylesheet">
+<!-- 부트스트랩 script-->
+<script src="../common/js/jquery-1.12.2.min.js"></script>
+<script src="../common/js/bootstrap/bootstrap.min.js"></script>
+<!--[if lt IE 9]>
+    <script src="../common/js/bootstrap/html5shiv.js"></script>
+    <script src="../common/js/bootstrap/respond.js"></script>
+    <![endif]-->
+<!-- script -->
+<script type="text/javascript" src="./js/pageMovement.js"></script>
+<script type="text/javascript" src="./js/projectDetail.js"></script>
+<script type="text/javascript" src="./js/projectList.js"></script>
+<script type="text/javascript" src="./js/qualityIndicator.js"></script>
+<script type="text/javascript" src="./js/tempfileDetail.js"></script>
+<!-- validation자바스크립트 -->
+<script src="../common/js/validation/jquery.validate.js"></script>
+<script src="../common/js/validation/validate.js"></script>
+<!-- 텍스트를 누르면 수정가능한 폼으로 변경되는 기능을 위한 자바스크립트 -->
+<script type="text/javascript" src="../common/js/inlineTextEditor.js"></script>
+<script type="text/javascript">
+	var editor = createEditor(callback);
+	function callback(obj) {
+	}
+</script>
+<!-- 경고창 자바스크립트 -->
+<script type="text/javascript" src="../common/js/showAlert.js"></script>
+</head>
+
+<body>
+	<div class="collector_wrap">
+		<header class="collector_header">
+			<nav class="topMenuNavbar navbar navbar-inverse navbar-fixed-top">
+				<div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="topMenuHeader navbar-header">
+						<button type="button" class="navbar-toggle collapsed"
+							data-toggle="collapse" data-target="#topMenuContainer">
+							<span class="sr-only">Toggle navigation</span> <span
+								class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="dashboard" style="padding-top: 5px;">JIRA
+							COLLECTOR<br />ADMINISTRATOR
+						</a>
+					</div>
+					<!-- /.topMenuHeader -->
+
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse" id="topMenuContainer">
+						<ul id="topMenuList" class="nav navbar-nav">
+							<li><a href="dashboard">대시보드 <span class="sr-only">(current)</span></a></li>
+							<li class="dropdown active"><a href="#"
+								class="dropdown-toggle" data-toggle="dropdown" role="button"
+								aria-expanded="false">프로젝트 관리 <span class="caret"></span>
+							</a>
+								<ul class="dropdown-menu" role="menu">
+									<li><a href="projectlist">프로젝트</a></li>
+									<li><a href="projectdate">날짜 설정(임의 메뉴)</a></li>
+									<li><a href="releaseVersionList">릴리즈</a></li>
+								</ul></li>
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown" role="button" aria-expanded="false">품질관리
+									<span class="caret"></span>
+							</a>
+								<ul class="dropdown-menu" role="menu">
+									<li><a href="#">품질점검</a></li>
+									<li><a href="#">품질보고서</a></li>
+								</ul></li>
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown" role="button" aria-expanded="false">측정
+									및 분석 <span class="caret"></span>
+							</a>
+								<ul class="dropdown-menu" role="menu">
+									<li><a href="#">고객사 결함현황</a></li>
+									<li><a href="#">전체분석결과</a></li>
+								</ul></li>
+							<li><a href="#">시스템 관리</a></li>
+
+						</ul>
+						<!-- /.topMenuList -->
+						<ul id="rightTopMenuList" class="nav navbar-nav navbar-right">
+							<li><input type="button" id="btnGoMainpage"
+								class="btn btn-default" value="메인 페이지 바로가기" /></li>
+							<li><span class="glyphicon glyphicon-user login"></span></li>
+						</ul>
+						<!-- /.rightTopMenuList -->
+					</div>
+					<!-- /.topMenuContainer -->
+				</div>
+				<!-- /.container-fluid -->
+			</nav>
+			<!-- /.topMenuNavbar -->
+		</header>
+		<!-- /.collector_header -->
+
+		<div class="collector_body" id="collectorBodyWrapper">
+			<div class="adminLeftMenuWrap side-menu">
+				<div class="adminLeftMenuNav navbar navbar-default"
+					role="navigation">
+					<div class="side-menu-header">
+						<div class="menu-name-wrapper">
+							<h1 class="side-menu-header-name">
+								<span class="sidebarTitle">프로젝트 관리</span>
+							</h1>
+						</div>
+					</div>
+					<!-- 본격 메뉴 -->
+					<div class="side-menu-container">
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="projectlist"><span
+									class="glyphicon glyphicon-cog"></span> 프로젝트</a></li>
+							<li><a href="projectdate"><span
+									class="glyphicon glyphicon-cog"></span> 날짜 설정(임의 메뉴)</a></li>
+							<li><a href="releaseVersionList"><span
+									class="glyphicon glyphicon-cog"></span> 릴리즈</a></li>
+						</ul>
+					</div>
+					<!-- /.side-menu-container -->
+				</div>
+				<!-- /.adminLeftMenuNav -->
+			</div>
+			<!-- /.adminLeftMenuWrap -->
+			<div class="adminWrap container-fluid side-body"
+				style="z-index: -10;">
+				<header id="admin-header-wrap" class="row">
+					<div class="col-xs-12">
+						<h2 class="adminContent-title">
+							<span class="mainTitle" id="mainTitle">프로젝트 상세</span>
+						</h2>
+						<hr />
+					</div>
+				</header>
+				<!-- 목록으로 돌아가기 버튼 -->
+				<div class="row">
+					<div id="btnGoList" class="row">
+						<button class="btn btn-default" id="btnForGoBack" type="button">
+							<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+							목록
+						</button>
+					</div>
+				</div>
+				<div id="adminContentWrap" class="row">
+					<div id="projectDetailWrap" class="col-xs-12">
+						<div id="projectDetailContentArea" role="tabpanel">
+							<!-- Nav tabs -->
+							<ul class="nav nav-tabs" role="tablist">
+								<li role="presentation" class="active"><a
+									href="#projectInfo" aria-controls="projectInfo" role="tab"
+									data-toggle="tab">프로젝트 정보</a></li>
+								<li role="presentation"><a href="#second"
+									aria-controls="profile" role="tab" data-toggle="tab">품질지표</a></li>
+								<li role="presentation"><a href="#third"
+									aria-controls="messages" role="tab" data-toggle="tab">자동 수집
+										조건</a></li>
+							</ul>
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div role="tabpanel" class="tab-pane active" id="projectInfo">
+									<form class="form-horizontal">
+										<div class="form-group">
+											<label for="projectName" class="col-xs-2 control-label">프로젝트
+												명</label>
+											<div class="col-xs-10" id="projectNameOfDetailPage"></div>
+										</div>
+										<hr />
+										<div class="form-group">
+											<label for="projectKey" class="col-xs-2 control-label">프로젝트
+												키</label>
+											<div class="col-xs-10" id="projectKeyOfDetailPage"></div>
+										</div>
+										<hr />
+										<div class="form-group">
+											<label for="projectKey" class="col-xs-2 control-label">담당자</label>
+											<div class="col-xs-10" id="projectManagerOfDetailPage">
+												<select class="form-control" id="personInChargeOfDetail" onmouseover="setCursor(this, 'pointer')">
+												</select><span class="validationAlert" id="newQualityIndicatorAlert"></span>
+											</div>
+										</div>
+									</form>
+								</div>
+								
+								<!-- /.projectInfo (첫번째 탭) -->
+								<div role="tabpanel" class="tab-pane" id="second">
+									<div id="qualityIndicatorButtonArea">
+										<table class="qualityIndicatorButton_content">
+											<tbody>
+												<tr>
+													<td class="tdContentButtonHeader" colspan="6">
+														<button class="btn btn-default" id="btnIndicatorAddition"
+															type="button" data-toggle="modal" data-dismiss="modal"
+															data-target=".indicatorAddition">
+															<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+															품질지표 추가
+														</button> &nbsp;
+														<button class="btn btn-default" id="btnindicatorDelete"
+															type="button" style="color: red;">
+															<span class="glyphicon glyphicon-minus"
+																aria-hidden="true"></span> 삭제
+														</button>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div id="qualityIndicatorContentArea">
+										<table class="qualityIndicatorTable_content">
+											<thead>
+												<tr>
+													<td class="tdcheck"><input type="checkbox"
+														id="allCheckbox" /></td>
+													<td class="tdMenu"><label id="graphtype">지표&nbsp;<span
+															class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+													</label></td>
+													<td class="tdMenu"><label id="targetChar">단위&nbsp;<span
+															class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+													</label></td>
+													<td class="tdMenu"><label id="targetNo">목표&nbsp;<span
+															class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+													</label></td>
+													<td class="tdExplanation"><label id="explanation">설명</label>
+													</td>
+												</tr>
+											</thead>
+										</table>
+									</div>
+								</div>
+								<!-- 두번째 탭 -->
+								<div role="tabpanel" class="tab-pane" id="third">...</div>
+								<!-- 세번째 탭 -->
+							</div>
+							<!-- /.tab-content -->
+						</div>
+						<!-- /#projectDetailContentArea, role="tabpanel" -->
+					</div>
+					<!-- /#projectDetailWrap -->
+				</div>
+				<!-- /.adminContentWrap -->
+			</div>
+			<!-- /.adminWrap -->
+			<!-- 추가모달 -->
+			<div class="modal fade indicatorAddition"
+				aria-labelledby="gridSystemModalLabel" aria-hidden="true"
+				id="indicatorAddition">
+				<div class="modal-dialog" style="width: 45%;">
+					<div class="modal-content">
+						<div class="indicatorAdditionHeader modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="gridSystemModalLabel">품질지표 추가</h4>
+						</div>
+						<div class="indicatorAdditionContent modal-body">
+							<div class="container-fluid">
+								<form class="form-horizontal" id="indicatorAdditionModal">
+									<div class="form-group">
+										<label for="projectName" class="col-xs-3 control-label">지표추가</label>
+										<div class="col-xs-8">
+											<select id="qualityIndicator" class="form-control">
+												<option>이슈조치율</option>
+												<option>테스트수행율</option>
+												<option>테스트PASS율</option>
+											</select> <span class="validationAlert" id="existingIndicatorAlert"></span>
+										</div>
+									</div>
+									<hr />
+									<div class="form-group">
+										<label for="measure" class="col-xs-3 control-label">단위</label>
+										<div class="col-xs-8">
+											<select id="qualityIndicatorUnit" class="form-control"
+												disabled>
+												<option>%</option>
+											</select> <span class="validationAlert"
+												id="newQualityIndicatorUnitAlert"></span>
+										</div>
+									</div>
+									<hr />
+									<div class="form-group">
+										<label for="goal" class="col-xs-3 control-label">목표</label>
+										<div class="col-xs-8 validationAlert"  id="QAGoal">
+											<input id="qualityIndicatorGoal" name="goal"
+												class="form-control" type="text" style="ime-mode: disabled;" />
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+						<div class="modal-footer indicatorAdditionButton">
+							<button type="button" class="btn btn-primary"
+								id="btnAddQualityIndicator">확인</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" id="btnAddQualityIndicatorCancel">취소
+							</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal, /.indicatorAddition -->
+			<!-- 수정모달 -->
+			<div class="modal fade indicatorChange"
+				aria-labelledby="gridSystemModalLabel" aria-hidden="true"
+				id="indicatorChange">
+				<div class="modal-dialog" style="width: 45%;">
+					<div class="modal-content">
+						<div class="modal-header indicatorChangeHeader">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="gridSystemModalLabel">품질지표 수정</h4>
+						</div>
+						<div class="modal-body indicatorChangeContent">
+							<div class="container-fluid">
+								<form class="form-horizontal" id="indicatorAdditionChangeModal">
+									<div class="form-group">
+										<label for="projectName" class="col-xs-3 control-label">지표</label>
+										<div class="col-xs-8">
+											<p id="qualityIndicatorChange" class="form-control-static">
+											</p> <span class="validationAlert"
+												id="existingIndicatorAlertChange"></span>
+										</div>
+									</div>
+									<hr />
+									<div class="form-group">
+										<label for="measure" class="col-xs-3 control-label">단위</label>
+										<div class="col-xs-8">
+											<select id="qualityIndicatorUnitChange" class="form-control"
+												disabled>
+												<option>%</option>
+											</select> <span class="validationAlert"
+												id="newQualityIndicatorUnitAlert"></span>
+										</div>
+									</div>
+									<hr />
+									<div class="form-group">
+										<label for="goal" class="col-xs-3 control-label">목표</label>
+										<div class="col-xs-8 validationAlert" id="QAGoalChange">
+											<input id="qualityIndicatorGoalChange" name="goalChange"
+												class="form-control" type="text" style="ime-mode: disabled;" />
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+						<div class="modal-footer indicatorChangeButton">
+							<button type="button" class="btn btn-primary"
+								id="btnChangeQualityIndicator">확인</button>
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal" id="btnAddQualityIndicatorChangeCancel">취소</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal, /.indicatorChange -->
+		</div>
+		<!-- /.collector_body -->
+	</div>
+	<!-- /.collector_wrap -->
+</body>
+</html>

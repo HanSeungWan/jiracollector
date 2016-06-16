@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name="com.daou.jiracollector.dao.entity.AdminTbEntity" table="admin_tb" schema="public" catalog="jiradata">
+        <id name="adminTbId" column="admin_tb_id">
+            <generator class="increment"/>
+        </id>
+        <property name="projectId" column="project_id"/>
+        <property name="versionId" column="version_id"/>
+        <property name="startdateYmd" column="startdate_ymd"/>
+        <property name="enddateYmd" column="enddate_ymd"/>
+    </class>
+    <class name="com.daou.jiracollector.dao.entity.IssuetypeTransitionTbEntity" table="issuetype_transition_tb"
+           schema="public"
+           catalog="jiradata">
+        <id name="issuetypeTransitionTbId" column="issuetype_transition_tb_id">
+            <generator class="increment"/>
+        </id>
+        <property name="issuetypeId" column="issuetype_id"/>
+        <property name="dateYdm" column="date_ydm"/>
+        <property name="projectId" column="project_id"/>
+        <property name="versionId" column="version_id"/>
+        <property name="countNo" column="count_no"/>
+    </class>
+    <class name="com.daou.jiracollector.dao.entity.MeasureStatusSettingTbEntity" table="measure_status_setting_tb"
+           schema="public" catalog="jiradata">
+        <id name="measureStatusSettingTbId" column="measure_status_setting_tb_id">
+            <generator class="increment"/>
+        </id>
+        <property name="statusMm" column="status_mm"/>
+        <property name="measureMm" column="measure_mm"/>
+        <property name="projectId" column="project_id"/>
+        <property name="jirastatusMm" column="jirastatus_mm"/>
+    </class>
+    <class name="com.daou.jiracollector.dao.entity.MeasureStatusTbEntity" table="measure_status_tb" schema="public"
+           catalog="jiradata">
+        <id name="measureStatusTbId" column="measure_status_tb_id">
+            <generator class="increment"/>
+        </id>
+
+        <property name="statusId" column="status_id"/>
+        <property name="dateYdm" column="date_ydm"/>
+        <property name="projectId" column="project_id"/>
+        <property name="versionId" column="version_id"/>
+        <property name="countNo" column="count_no"/>
+
+    </class>
+    <class name="com.daou.jiracollector.dao.entity.ProjectTbEntity" table="project_tb" schema="public"
+           catalog="jiradata">
+        <id name="projectTbId" column="project_tb_id">
+            <generator class="increment"/>
+        </id>
+        <property name="projectMm" column="project_mm"/>
+        <property name="jiraProjectMm" column="jira_project_mm"/>
+        <property name="releaseNo" column="release_no"/>
+        <property name="activeBoolean" column="active_boolean"/>
+        <property name="managerId" column="manager_id"/>
+    </class>
+    <class name="com.daou.jiracollector.dao.entity.UserTbEntity" table="user_tb" schema="public" catalog="jiradata">
+        <id name="userTbId" column="user_tb_id">
+            <generator class="increment"/>
+        </id>
+        <property name="nameMm" column="name_mm"/>
+    </class>
+    <class name="com.daou.jiracollector.dao.entity.VersionTbEntity" table="version_tb" schema="public"
+           catalog="jiradata">
+        <id name="versionTbId" column="version_tb_id">
+            <generator class="increment"/>
+        </id>
+        <property name="projectId" column="project_id"/>
+        <property name="versionMm" column="version_mm"/>
+        <property name="releaseBoolean" column="release_boolean"/>
+    </class>
+    <class name="com.daou.jiracollector.dao.entity.IndicatorSettingTbEntity" table="indicator_setting_tb" schema="public"
+           catalog="jiradata">
+        <id name="indicatorSettingTbId" column="indicator_setting_tb_id">
+            <generator class="increment"/>
+        </id>
+        <property name="projectId" column="project_id"/>
+        <property name="targetNo" column="target_no"/>
+        <property name="targetCharMm" column="target_char_mm"/>
+        <property name="explanationMm" column="explanation_mm"/>
+        <property name="graphtypeId" column="graphtype_id"/>
+    </class>
+    <class name="com.daou.jiracollector.dao.entity.IndicatorTbEntity" table="indicator_tb" schema="public" catalog="jiradata">
+        <id name="indicatorId" column="indicator_id">
+            <generator class="increment"/>
+        </id>
+        <property name="indicatorMm" column="indicator_mm"/>
+    </class>
+    <class name="com.daou.jiracollector.dao.entity.IssuetypeTbEntity" table="issuetype_tb" schema="public" catalog="jiradata">
+        <id name="issuetypeTbId" column="issuetype_tb_id">
+            <generator class="increment"/>
+        </id>
+        <property name="issuetypeMm" column="issuetype_mm"/>
+        <property name="projectId" column="project_id"/>
+    </class>
+</hibernate-mapping>

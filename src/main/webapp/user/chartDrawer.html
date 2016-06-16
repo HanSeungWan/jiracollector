@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type"
+          content="application/json; charset=utf-8">
+    <title>JIRA 이슈 추이 그래프</title>
+    <!-- 부트스트랩외 추가작성 css -->
+    <link rel="stylesheet" type="text/css" href="../common/css/additional-design.css"/>
+    <!-- 부트스트랩 css-->
+    <link href="../common/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 부트스트랩 datetimepicker css -->
+    <link href="../common/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <!-- 부트스트랩 leftmenu css -->
+    <link href="../common/css/simple-sidebar.css" rel="stylesheet">
+    <!-- 부트스트랩 script-->
+    <script src="../common/js/jquery-1.12.2.min.js"></script>
+    <script src="../common/js/bootstrap/bootstrap.min.js"></script>
+    <!--[if lt IE 9]>
+    <script src="../common/js/bootstrap/html5shiv.js"></script>
+    <script src="../common/js/bootstrap/respond.js"></script>
+    <![endif]-->
+    <!-- script -->
+    <script type="text/javascript" src="../common/js/projectSearch.js"></script>
+    <script type="text/javascript" src="../common/js/versionSearch.js"></script>
+    <script type="text/javascript" src="./js/issueChangeChartsDrawer.js"></script>
+    <script type="text/javascript" src="./js/issueActionChartsDrawer.js"></script>
+    <script type="text/javascript" src="./js/tableMaker.js"></script>
+    <script type="text/javascript" src="./js/pageMovement.js"></script>
+    <script type="text/javascript" src="../common/js/showAlert.js"></script>
+    <script type="text/javascript" src="../common/js/highcharts/highcharts.js"></script>
+    <script type="text/javascript" src="../common/js/highcharts/highcharts-more.js"></script>
+
+    <!-- 도메인에서 user/ 이 제외되었을 때 사용 -->
+    <script type="text/javascript" src="./user/js/issueChangeChartsDrawer.js"></script>
+    <script type="text/javascript" src="./user/js/issueActionChartsDrawer.js"></script>
+    <script type="text/javascript" src="./user/js/tableMaker.js"></script>
+    <script type="text/javascript" src="./user/js/pageMovement.js"></script>
+
+
+    <!-- 로딩 script -->
+    <script>
+        $(document).ready(function ($) {
+
+            // 페이지가 로딩될 때 'Loading 이미지'를 숨김
+            $('#viewLoading').hide();
+
+            // ajax 실행 및 완료시 'Loading 이미지'작동
+            $('#viewLoading').ajaxStart(function () {
+
+                $(this).fadeIn(500);
+
+            }).ajaxStop(function () {
+
+                $(this).hide();
+
+            });
+        });
+    </script>
+</head>
+
+<body>
+<div class="collector_wrap">
+    <header class="collector_header">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed"
+                            data-toggle="collapse" data-target="#menu_container">
+                        <span class="sr-only">Toggle navigation</span> <span
+                            class="icon-bar"></span> <span class="icon-bar"></span> <span
+                            class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="chartdrawer" style="padding-top: 15px;">JIRA
+                        COLLECTOR
+                    </a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="menu_container">
+                    <ul id="topMenuList" class="nav navbar-nav">
+                        <li class="active"><a href="chartdrawer">분석그래프 <span
+                                class="sr-only">(current)</span></a></li>
+                        <li class="dropdown"><a href="#" class="dropdown-toggle"
+                                                data-toggle="dropdown" role="button" aria-expanded="false">dropdown
+                            <span class="caret"></span>
+                        </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">menu1</a></li>
+                                <li><a href="#">menu2</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">MENU</a></li>
+
+                    </ul>
+                    <ul id="rightTopMenuList" class="nav navbar-nav navbar-right">
+                        <li><input type="button" id="btnGoAdmin"
+                                   class="btn btn-default" value="관리자 페이지 바로가기"/></li>
+                        <li><span class="glyphicon glyphicon-user login"></span></li>
+                    </ul>
+
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+    </header>
+
+    <div class="collector_body" id="collectorBodyWrapper">
+        <div class="graphLeftMenuWrap side-menu">
+            <div class="graphLeftMenuNav navbar navbar-default"
+                 role="navigation">
+                <div class="side-menu-container">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="chartdrawer"><span
+                                class="glyphicon glyphicon-equalizer"></span> 이슈 그래프</a></li>
+                        <li class="panel panel-default" id="sidemenu-dropdown"><a
+                                data-toggle="collapse" href="#dropdown-QA"> <span
+                                class="glyphicon glyphicon-user"></span> 메뉴2 <span
+                                class="caret"></span></a>
+                            <div id="dropdown-QA" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul class="nav navbar-nav">
+                                        <li class="submenu"><a href="#">submenu1</a></li>
+                                        <li class="submenu"><a href="#">submenu2</a></li>
+                                        <li class="submenu"><a href="#">submenu3</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li><a href="#"><span class="glyphicon glyphicon-plane"></span>
+                            메뉴3</a></li>
+                        <li class="panel panel-default" id="sidemenu-dropdown"><a
+                                data-toggle="collapse" href="#dropdown-config"> <span
+                                class="glyphicon glyphicon-user"></span> 메뉴4 <span
+                                class="caret"></span></a>
+                            <div id="dropdown-config" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul class="nav navbar-nav">
+                                        <li class="submenu"><a href="#">submenu1</a></li>
+                                        <li class="submenu"><a href="#">submenu2</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.side-menu-container -->
+            </div>
+            <!-- /.graphLeftMenuNav -->
+        </div>
+        <!-- /.graphLeftMenuWrap -->
+        <div class="graphWrap container-fluid side-body">
+            <header id="admin-header-wrap" class="row">
+                <div class="col-xs-12">
+                    <h2 class="adminContent-title">
+                        <span class="mainTitle">제품 및 버전 별 이슈 그래프</span>
+                    </h2>
+                    <hr/>
+                </div>
+            </header>
+            <div id="graphContentWrap" class="row">
+                <div id="graphContent" class="col-xs-12">
+                    <div id="graphContentHeaderArea">
+                        <table class="normalTableForSelection_header">
+                            <thead>
+                            <tr>
+                                <th colspan="3">제품 및 버전 설정</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <!-- /#graphContentHeaderArea -->
+                    <div id="graphContentArea">
+                        <div id="productSelectionForGraph">
+                            <table class="normalTableForSelection_content">
+                                <tbody>
+                                <tr>
+                                    <td class="tdMenu">제품선택</td>
+                                    <td class="tdContent" id="productOption" colspan="2"><label
+                                            class="select-label"> <select
+                                            class="selectbox form-control" name="project" id="project">
+                                        <option id="projectdefault" value="projectdefault"
+                                                class="dropdown-header">제품선택
+                                        </option>
+                                    </select>
+                                    </label></td>
+                                </tr>
+                                <tr>
+                                    <td class="tdMenu">버전선택</td>
+                                    <td class="tdContent" colspan="2"><label
+                                            class="select-label"> <select
+                                            class="selectbox form-control" name="version" id="version">
+                                        <option id="versiondefault" value="versiondefault"
+                                                class="dropdown-header">버전선택
+                                        </option>
+                                    </select>
+                                    </label></td>
+                                </tr>
+                                <tr>
+                                    <td class="tdMenu">데이터선택</td>
+                                    <td class="tdContent_selectionData"><label
+                                            class="select-label"> <select
+                                            class="selectbox form-control" name="graph" id="graph">
+                                        <option id="issueChanges" value="issueChanges">JIRA
+                                            이슈 추이
+                                        </option>
+                                        <option id="stepChanges" value="stepChanges">JIRA
+                                            이슈 조치율
+                                        </option>
+                                    </select>
+                                    </label></td>
+                                    <td class="tdContent_button"><input type="button"
+                                                                        id="btnSubmitGraph" class="btn btn-default"
+                                                                        value="그래프 생성"/></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /#productSelectionForGraph -->
+                        <div id="drawedGraph" class="row">
+                            <div id="chartContainer"></div>
+                        </div>
+                        <!-- /#drawGraph -->
+                        <div id="dataTable">
+                            <div class="dataTableHeaderArea" id="dvSelectTable">
+                                <table class="normalTableForSelection_header">
+                                    <thead>
+                                    <tr>
+                                        <th class="selectbox-mainpage-data"><label
+                                                class="select-label"> <select name="tableType"
+                                                                              id="tableType"
+                                                                              class="selectbox form-control">
+                                            <option id="allData" value="allData">전체 데이터 보기</option>
+                                            <option id="lastestData" value="lastestData">최신
+                                                데이터 보기
+                                            </option>
+                                        </select>
+                                        </label></th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <!-- /.dataTableHeaderArea -->
+                            <div class="dataTableContentArea" id="dvOutput">
+                                <table id="tbContents">
+                                </table>
+                            </div>
+                            <!-- /.dataTableContentArea -->
+                        </div>
+                        <!-- /#dataTable -->
+                    </div>
+                    <!-- /#graphContentArea -->
+                </div>
+                <!-- /.graphContentWrap -->
+            </div>
+            <!-- /#graphContentWrap -->
+        </div>
+        <!-- /.graphWrap -->
+        <div id="viewLoading">
+            <img src="../common/images/viewLoading.gif"/>
+        </div>
+        <!-- /#viewLoading -->
+    </div>
+</div>
+<!-- /.collector_wrap -->
+</body>
+</html>

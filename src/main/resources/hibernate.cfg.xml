@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/jiradata</property>
+    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgresPlusDialect</property>
+    <property name="hibernate.current_session_context_class">thread</property>
+
+    <!-- hibernate에서 sql query 문을 확인 해야 한다면, 주석을 제거하시오.
+    <property name="show_sql">true</property>
+    -->
+
+    <property name="hibernate.connection.username">postgres</property>
+    <property name="hibernate.connection.password">nmop1019</property>
+
+    <mapping resource="mapping.xml"/>
+    <mapping class="com.daou.jiracollector.dao.entity.AdminTbEntity"/>
+    <mapping class="com.daou.jiracollector.dao.entity.IssuetypeTransitionTbEntity"/>
+    <mapping class="com.daou.jiracollector.dao.entity.MeasureStatusSettingTbEntity"/>
+    <mapping class="com.daou.jiracollector.dao.entity.MeasureStatusTbEntity"/>
+    <mapping class="com.daou.jiracollector.dao.entity.ProjectTbEntity"/>
+    <mapping class="com.daou.jiracollector.dao.entity.UserTbEntity"/>
+    <mapping class="com.daou.jiracollector.dao.entity.VersionTbEntity"/>
+    <mapping class="com.daou.jiracollector.dao.entity.IndicatorSettingTbEntity"/>
+    <mapping class="com.daou.jiracollector.dao.entity.IndicatorTbEntity"/>
+    <mapping class="com.daou.jiracollector.dao.entity.IssuetypeTbEntity"/>
+
+    <!-- DB schema will be updated if needed -->
+    <!-- <property name="hbm2ddl.auto">update</property> -->
+
+  </session-factory>
+</hibernate-configuration>
